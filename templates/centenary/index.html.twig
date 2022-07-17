@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Centenary index{% endblock %}
+
+{% block body %}
+    <h1>Centenary index</h1>
+
+    {# {{ knp_pagination_filter(pagination, {'c.lastname' : 'Lastname', 'c.firstname': 'Firstname'}) }} #}
+
+    <div class="sort">
+        <p>Trier par :</p>
+        <div class="btn_group btn_group_rounded">
+            {{ knp_pagination_sortable(pagination, 'Nom (A-Z)', 'c.lastname',{},{'direction': 'asc'}) }}
+            {{ knp_pagination_sortable(pagination, 'Nom (Z-A)', 'c.lastname', {}, {'direction': 'desc'}) }}
+            {{ knp_pagination_sortable(pagination, 'Age croissant', 'c.dateOfBirth', {}, {'direction': 'desc'}) }}
+            {{ knp_pagination_sortable(pagination, 'Age décroissant', 'c.dateOfBirth', {}, {'direction': 'asc'}) }}
+
+        </div>
+    </div>
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Etat</th>
+                <th>Date de naissance</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for centenary in pagination %}
+            <tr>
+                <td>{{ centenary.lastname }}</td>
+                <td>{{ centenary.firstname }}</td>
+                <td>{{ centenary.alive ? 'En vie' : 'Décédé' }}</td>
+                <td>{{ centenary.dateOfBirth ? centenary.dateOfBirth|date('d/m/Y') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_centenary_show', {'id': centenary.id}) }}">Voir</a>
+                    <a href="{{ path('app_centenary_edit', {'id': centenary.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">Aucun résultat</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="navigation">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+
+    <a href="{{ path('app_centenary_new') }}">Ajouter un centenaire</a>
+{% endblock %}

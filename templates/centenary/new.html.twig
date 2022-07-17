@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Centenary{% endblock %}
+
+{% block body %}
+    <h1>Create new Centenary</h1>
+
+    {{ include('centenary/_form.html.twig') }}
+
+    <a href="{{ path('app_centenary_index') }}">Retour à la liste</a>
+{% endblock %}

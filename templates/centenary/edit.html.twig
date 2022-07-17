@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Centenary{% endblock %}
+
+{% block body %}
+    <h1>Edit Centenary</h1>
+
+    {{ include('centenary/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+    <a href="{{ path('app_centenary_index') }}">back to list</a>
+
+    {{ include('centenary/_delete_form.html.twig') }}
+{% endblock %}

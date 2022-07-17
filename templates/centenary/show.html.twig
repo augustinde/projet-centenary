@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Centenary{% endblock %}
+
+{% block body %}
+    <h1>Centenary</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ centenary.id }}</td>
+            </tr>
+            <tr>
+                <th>Firstname</th>
+                <td>{{ centenary.firstname }}</td>
+            </tr>
+            <tr>
+                <th>Lastname</th>
+                <td>{{ centenary.lastname }}</td>
+            </tr>
+            <tr>
+                <th>ImageName</th>
+                <td>{{ centenary.imageName }}</td>
+            </tr>
+            <tr>
+                <th>ImageSize</th>
+                <td>{{ centenary.imageSize }}</td>
+            </tr>
+            <tr>
+                <th>Declaring</th>
+                <td>{{ centenary.declaring }}</td>
+            </tr>
+            <tr>
+                <th>Alive</th>
+                <td>{{ centenary.alive ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>DateOfBirth</th>
+                <td>{{ centenary.dateOfBirth ? centenary.dateOfBirth|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_centenary_index') }}">back to list</a>
+
+    <a href="{{ path('app_centenary_edit', {'id': centenary.id}) }}">edit</a>
+
+    {{ include('centenary/_delete_form.html.twig') }}
+{% endblock %}
